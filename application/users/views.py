@@ -10,6 +10,20 @@ def users_index():
 def user_form():
     return render_template("users/new.html")
 
+@app.route("/users/edit")
+def user_edit():
+    return render_template("users/edit.html")
+
+@app.route("/users/<user_id>", methods=["POST"])
+def user_set_credits(user_id):
+
+    u = User.query.get(user_id)
+    u.credits = request.form.get("credits")
+    if not u:
+        db.session().commit()
+
+    return redirect(url_for('users_index'))
+
 @app.route("/users", methods=["POST"])
 def user_create():
 

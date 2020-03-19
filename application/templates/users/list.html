@@ -10,6 +10,12 @@
     <tr>
       <td>{{ user.name }}</td>
       <td>{{ user.credits }}</td>
+      <td>
+        <form method="POST" action="{{ url_for('user_set_credits', user_id = user.id )}}">
+          <input type="number" name="credits">
+          <input type="submit" value="edit credits">
+        </form>
+      </td>
     </tr>
     {% endfor %}
   </table>
