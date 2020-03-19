@@ -2,7 +2,7 @@ from application import app, db
 from flask import redirect, render_template, request, url_for
 from application.users.models import User
 
-@app.route("/tasks", methods=["GET"])
+@app.route("/users", methods=["GET"])
 def users_index():
     return render_template("users/list.html", users = User.query.all())
 
