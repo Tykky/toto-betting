@@ -2,7 +2,11 @@
 
 {% block body %}
   <h1> Toto-betting </h1>
-  <a href="/users/register">Register</a>
-  <br>
-  <a href="/users">list users</a>
+  {% if current_user.is_authenticated %}
+  <p>
+    Logged in as {{ current_user.username }}. <a href="{{ url_for('auth_logout') }}">Logout</a>
+  </p>
+  {% else %}
+  <a href="{{ url_for('auth_login') }}">Login</a>
+  {% endif %}
 {% endblock %}

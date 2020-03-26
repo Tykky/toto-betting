@@ -9,9 +9,9 @@ bcrypt = Bcrypt(app)
 from flask_sqlalchemy import SQLAlchemy
 
 if os.environ.get("HEROKU"):
-    app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
+    app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")+"?charset=utf8"
 else:
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db?charset=utf8"
 
 
 app.config["SQLALCHEMY_ECHO"] = True

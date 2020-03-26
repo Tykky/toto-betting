@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import PasswordField, StringField
+from wtforms import PasswordField, StringField, validators
   
 class LoginForm(FlaskForm):
     username = StringField("Username")
@@ -9,9 +9,10 @@ class LoginForm(FlaskForm):
         csrf = False
 
 class RegisterForm(FlaskForm):
-    username = StringField("Username")
-    password1 = PasswordField("Password")
-    password2 = PasswordField("Retype password")
+    pminlength = 8
+    username = StringField("Username", [validators.length(min=4)])
+    password1 = PasswordField("Password", [validators.length(min=pminlength)])
+    password2 = PasswordField("Retype password", [validators.length(min=pminlength)])
 
     class Meta:
         csrf = False

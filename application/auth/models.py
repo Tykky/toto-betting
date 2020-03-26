@@ -10,12 +10,12 @@ class User(db.Model):
     date_modified = db.Column(db.DateTime, default=db.func.current_timestamp(),
                               onupdate=db.func.current_timestamp())
 
-    username = db.Column(db.String(144), nullable=False)
-    phash = db.Column(db.String(64), nullable=False)
+    username = db.Column(db.String(12), nullable=False, unique=True)
+    phash = db.Column(db.String(23), nullable=False)
 
-    def __init__(self, name, username, password):
+    def __init__(self, username, phash):
         self.username = username
-        self.phash = bcrypt.generate_password_hash(password)
+        self.phash = phash
   
     def get_id(self):
         return self.id
