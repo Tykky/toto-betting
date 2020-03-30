@@ -10,7 +10,7 @@ class LoginForm(FlaskForm):
 
 class RegisterForm(FlaskForm):
     pminlength = 8
-    username = StringField("Username", [validators.length(min=4)])
+    username = StringField("Username", [validators.length(min=2,max=12)])
     password1 = PasswordField("Password", [validators.length(min=pminlength)])
     password2 = PasswordField("Retype password", [validators.length(min=pminlength)])
 
