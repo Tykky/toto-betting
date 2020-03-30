@@ -8,11 +8,6 @@ bcrypt = Bcrypt(app)
 
 from flask_sqlalchemy import SQLAlchemy
 
-
-from application import app
-
-app.logger.addHandler()
-
 if os.environ.get("HEROKU"):
     app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
 else:
