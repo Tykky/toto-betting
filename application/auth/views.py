@@ -12,12 +12,8 @@ def auth_login():
         return render_template("auth/loginform.html", form = LoginForm())
 
     form = LoginForm(request.form)
-    # mahdolliset validoinnit
 
     user = User.query.filter_by(username=form.username.data).first()
-
-    print(user.username)
-    print(user.phash.decode('utf-8'))
 
     if not user or not bcrypt.check_password_hash(user.phash, form.password.data):
         return render_template("auth/loginform.html", form = form,
