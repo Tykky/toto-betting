@@ -46,7 +46,11 @@ def auth_register():
         form.username.errors.append("Username already taken")
         return render_template("auth/registerform.html", form = form)
 
-    user = User(form.username.data, bcrypt.generate_password_hash(form.password1.data))
+    phash = bcrypt.generate_password_hash(form.password1.data)
+    print("---PRINT PASSWORD HASH---")
+    print(phash)
+    print("--END PASSWORD HASH---")
+    user = User(form.username.data, phash)
 
     db.session().add(user)
     db.session().commit()
