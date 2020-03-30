@@ -10,7 +10,7 @@ class User(db.Model):
                               onupdate=db.func.current_timestamp())
 
     username = db.Column(db.String(12), nullable=False, unique=True)
-    phash = db.Column(db.String(10485760), nullable=False)
+    phash = db.Column(db.PickleType, nullable=False)
 
     def __init__(self, username, phash):
         self.username = username
