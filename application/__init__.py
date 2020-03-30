@@ -8,6 +8,11 @@ bcrypt = Bcrypt(app)
 
 from flask_sqlalchemy import SQLAlchemy
 
+
+from application import app
+
+app.logger.addHandler()
+
 if os.environ.get("HEROKU"):
     app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
 else:
@@ -33,8 +38,10 @@ login_manager.login_view = "auth_login"
 login_manager.login_message = "Please login to use this functionality."
 
 @login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(user_id)
+def load_user(id):
+    return User.query.get(id)
 
-# luodaan taulut tietokantaan tarvittaessa
-db.create_all()
+try:
+    db.create_all()
+except:
+    pass
