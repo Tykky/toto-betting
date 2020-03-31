@@ -19,8 +19,6 @@ def auth_login():
         return render_template("auth/loginform.html", form = form,
                                error = "Invalid username or password")
 
-    print(user.phash)
-
     login_user(user)
     return redirect(url_for("index"))
 

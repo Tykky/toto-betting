@@ -11,10 +11,12 @@ class User(db.Model):
 
     username = db.Column(db.String(12), nullable=False, unique=True)
     phash = db.Column(db.Binary(60), nullable=False)
+    credits = db.Column(db.Float)
 
     def __init__(self, username, phash):
         self.username = username
         self.phash = phash
+        self.credits = 0.0
   
     def get_id(self):
         return self.id
