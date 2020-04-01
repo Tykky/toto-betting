@@ -9,10 +9,13 @@ class Race(db.Model):
     location = db.Column(db.String(16), nullable=False)
     description = db.Column(db.String(2000))
 
+    isopen = db.Column(db.Boolean, nullable=False)
+
     def __init__(self, name, location, description=""):
         self.name = name
         self.location = location
         self.description = description
+        self.isopen = True
 
     def get_id(self):
         return self.raceid
@@ -25,4 +28,3 @@ class Race(db.Model):
 
     def is_authenticated(self):
         return False
-

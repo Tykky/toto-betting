@@ -1,20 +1,30 @@
 {% extends "layout.html" %}
 
 {% block body %}
-  <h1> Toto-betting </h1>
   {% if current_user.is_authenticated %}
-  <p>
-    Logged in as {{ current_user.username }}. <a href="{{ url_for('auth_logout') }}">Logout</a>
-  </p>
   {% if current_user.isadmin %}
     <p>
       User has admin privileges
     </p>
-<p><a href="{{ url_for('add_race') }}">Add races</a></p>
   {% endif %}
-  <a href="{{ url_for('bets') }}">View bets</a>
-  {% else %}
-  <a href="{{ url_for('auth_login') }}">Login</a><br>
-  <a href="{{ url_for('auth_register') }}">register</a>
   {% endif %}
+<h3>Bets in total: {{ bcount }}</h3>
+<h3>Open bets in total: {{ obcount }}</h3>
+<h3>Total credits spent on bets {{ cspent }}€ </h3>
+<h2>Current bets placed on open races</h2>
+<table class="table">
+  <tr>
+    <th>User</th>
+    <th>Race</th>
+    <th>Location</th>
+    <th>Bet amount</th>
+  </tr>
+  {% for row in summary %}
+  <tr>
+    {% for item in row %}
+      <td>{{ item }}</td>
+    {% endfor %}
+  </tr>
+  {% endfor %}
+</table>
 {% endblock %}

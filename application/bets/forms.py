@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import DecimalField
+from wtforms import DecimalField, validators
 
 class PlaceBetForm(FlaskForm):
     amount = DecimalField("bet amount")

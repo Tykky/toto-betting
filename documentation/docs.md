@@ -7,9 +7,9 @@ Admin can add new races.
 
 ## User stories
 
-* Users can register and login
-* Users can view their profile information (balance etc..)
-* Users can view current races
-* Users are able to place bets on current races
-* Users can view previous races
+* User can register and login
+* User can view profile information (balance etc..)
+* User can view current races
+* User is able to place bets on current races
+* User can view previous races
 * Admin can perform user actions + create new races

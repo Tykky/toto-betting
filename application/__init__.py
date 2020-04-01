@@ -59,6 +59,7 @@ from application.auth import views
 from application.bets import views
 from application.races import views
 
+
 @login_manager.user_loader
 def load_user(id):
     return User.query.get(id)

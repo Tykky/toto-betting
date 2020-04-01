@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block body %}
+<h1>Place bet on {{ race.name }}</h1>
+<b>Current balance: {{ current_user.credits }}</b>
+<p>Race location: {{ race.location }}</p>
+<h2>Race description:</h2>
+<p>{{ race.description }}</p>
+<form method="POST" action="{{url_for('place_bet',raceid=race.raceid)}}">
+    <div class="form-group">
+    <label>{{form.amount.label}}</label>
+    {{form.amount}}
+    <input type="submit" value="Place bet" class="btn btn-primary">
+    </div>
+</form>
+{% endblock %}

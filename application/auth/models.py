@@ -11,13 +11,15 @@ class User(db.Model):
 
     username = db.Column(db.String(12), nullable=False, unique=True)
     phash = db.Column(db.Binary(60), nullable=False)
-    credits = db.Column(db.Float, nullable=False)
+    credits = db.Column(db.Numeric, nullable=False)
     isadmin = db.Column(db.Boolean, nullable=False)
+
+    bets = db.relationship("Bet", backref='account', lazy=True)
 
     def __init__(self, username, phash):
         self.username = username
         self.phash = phash
-        self.credits = 0.0
+        self.credits = 100
         self.isadmin = False
   
     def get_id(self):

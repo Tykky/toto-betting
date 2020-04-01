@@ -1,4 +1,5 @@
 from application import db
+from sqlalchemy.sql import text
 
 class Bet(db.Model):
   
@@ -7,7 +8,9 @@ class Bet(db.Model):
     amount = db.Column(db.Numeric, nullable=False)
     
     userid = db.Column(db.Integer, db.ForeignKey('account.userid'), nullable=False)
-    raceid = db.Column(db.Integer, db.ForeignKey('bet.betid'), nullable=False)
+    raceid = db.Column(db.Integer, db.ForeignKey('race.raceid'), nullable=False)
+
+    race = db.relationship("Race", backref='bet', lazy=True)
 
     def __init__(self, amount, userid, raceid):
         self.amount = amount
@@ -25,4 +28,29 @@ class Bet(db.Model):
         return False
 
     def is_authenticated(self):
-        return True
+        return False
+
+    @staticmethod
+    def bet_count():
+        stmt = text("SELECT COUNT(bet.betid) FROM bet")
+        return db.engine.execute(stmt).first()[0]
+
+    @staticmethod
+    def bet_open_count():
+        stmt = text("SELECT COUNT(bet.betid) FROM bet"
+                    " INNER JOIN race ON race.raceid = bet.raceid"
+                    " WHERE race.isopen IS true")
+        return db.engine.execute(stmt).first()[0]
+
+    @staticmethod
+    def bet_credits_spent():
+        stmt = text("SELECT SUM(bet.amount) FROM bet")
+        return db.engine.execute(stmt).first()[0]
+
+    @staticmethod
+    def bet_summary():
+        stmt = text("SELECT account.username, race.name, race.location, bet.amount"
+                    " FROM bet INNER JOIN race ON race.raceid = bet.raceid"
+                    " INNER JOIN account ON account.userid = bet.userid"
+                    " WHERE race.isopen IS true")
+        return db.engine.execute(stmt)
