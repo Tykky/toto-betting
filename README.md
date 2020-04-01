@@ -12,6 +12,12 @@ bets on horse racing.
 **Note** that in the current state the removal of races does 
 not work as intended. 
 
+Use these user credentials to gain admin access on heroku:
+
+Username: admin
+
+password: password123
+
 ### Database diagram
 
 ![](documentation/Totogram.png)
