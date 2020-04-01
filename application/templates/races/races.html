@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block body %}
+<h1>Races</h1>
+<table>
+    <tr>
+        <th>name</th>
+        <th>location</th>
+    </tr>
+    {% for race in races %}
+        <tr>
+            <td>{{ race.name }}</td>
+            <td>{{ race.location }}</td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}
