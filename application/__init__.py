@@ -54,6 +54,7 @@ from application import views
 from application.auth.models import User
 from application.bets.models import Bet
 from application.races.models import Race
+from application.horses.models import Horse
 
 from application.auth import views
 from application.bets import views

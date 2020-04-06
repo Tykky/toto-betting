@@ -7,6 +7,8 @@ class Bet(db.Model):
     date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
     amount = db.Column(db.Numeric, nullable=False)
     
+    isopen = db.Column(db.Boolean, nullable=False)
+
     userid = db.Column(db.Integer, db.ForeignKey('account.userid'), nullable=False)
     raceid = db.Column(db.Integer, db.ForeignKey('race.raceid'), nullable=False)
 
@@ -16,6 +18,7 @@ class Bet(db.Model):
         self.amount = amount
         self.userid = userid
         self.raceid = raceid
+        self.isopen = True
 
   
     def get_id(self):
