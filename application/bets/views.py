@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, abort
 from application import app, login_required, db
 from application.races.models import Race
 from application.bets.models import Bet
@@ -22,10 +22,14 @@ def place_bet(raceid):
         form = PlaceBetForm(request.form)
         amount = form.amount.data
         if amount and current_user.credits - amount >= 0:
-            bet = Bet(amount, current_user.get_id(), raceid)
+            bet = Bet(amount, current_user.get_id(), raceid, 2)
             current_user.credits = current_user.credits - amount
             db.session().add(bet)
             db.session().commit()
+        else:
+            return abort(400)
+    else:
+        return abort(400)
 
     return redirect(url_for('bets'))
 

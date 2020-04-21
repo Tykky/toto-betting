@@ -59,6 +59,7 @@ from application.horses.models import Horse
 from application.auth import views
 from application.bets import views
 from application.races import views
+from application.horses import views
 
 
 @login_manager.user_loader
