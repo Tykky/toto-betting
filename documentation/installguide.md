@@ -7,6 +7,18 @@ git clone https://github.com/Tykky/toto-betting
 cd toto-betting
 ```
 
+## Setup python virtual environment
+
+```
+python -m venv venv
+```
+
+## Activate venv
+
+```
+source venv/bin/activate
+```
+
 ## Install dependencies through python pip
 ```
 pip install -r requirements.txt

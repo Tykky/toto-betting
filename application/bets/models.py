@@ -44,7 +44,7 @@ class Bet(db.Model):
     def bet_open_count():
         stmt = text("SELECT COUNT(bet.betid) FROM bet"
                     " INNER JOIN race ON race.raceid = bet.raceid"
-                    " WHERE race.isopen IS true")
+                    " WHERE race.isopen IS TRUE")
         return db.engine.execute(stmt).first()[0]
 
     @staticmethod
@@ -57,5 +57,5 @@ class Bet(db.Model):
         stmt = text("SELECT account.username, race.name, race.location, bet.amount"
                     " FROM bet INNER JOIN race ON race.raceid = bet.raceid"
                     " INNER JOIN account ON account.userid = bet.userid"
-                    " WHERE race.isopen IS true")
+                    " WHERE race.isopen IS TRUE")
         return db.engine.execute(stmt)
