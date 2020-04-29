@@ -24,8 +24,8 @@ def add_horse():
 
 @app.route("/horses/<horseid>/delete", methods=['POST'])
 @login_required(role="ADMIN")
-def delete_horse():
-    Race.query.filter_by(raceid=horseid).delete()
+def delete_horse(horseid):
+    Horse.query.filter_by(horseid=horseid).delete()
     db.session().commit()
     
-    return redirect(url_for())
+    return redirect(url_for('add_horse'))

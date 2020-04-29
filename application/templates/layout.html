@@ -4,10 +4,11 @@
     <meta charset="utf-8">
     <title>Toto-betting</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/png" href="/static/favicon.png"/>
   </head>
   <body style="height:100%">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-      <a class="navbar-brand" href="{{url_for('index')}}">Toto-betting</a>
+     <a class="navbar-brand" href="{{ url_for('index') }}" style="padding: 4px;margin:auto"> <img src="/static/images/totobetting_logo.png" style="height:60px;width: auto;" title="Toto betting"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>

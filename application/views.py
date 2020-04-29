@@ -1,4 +1,5 @@
-from flask import render_template
+import os
+from flask import render_template   
 from application import app
 from application.bets.models import Bet
 

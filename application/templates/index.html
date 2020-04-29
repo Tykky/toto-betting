@@ -2,17 +2,15 @@
 
 {% block body %}
 <div class="container">
-  {% if current_user.is_authenticated %}
-  {% if current_user.isadmin %}
+  {% if current_user.is_authenticated and current_user.isadmin %}
     <p>
       User has admin privileges
     </p>
     {% endif %}
-    {% endif %}
   <h3>Bets in total: {{ bcount }}</h3>
   <h3>Open bets in total: {{ obcount }}</h3>
   <h3>Total credits spent on bets {{ cspent }}€ </h3>
-  <h2>Your bets</h2>
+  <h2>Current bets placed on open races</h2>
   <table class="table">
     <tr>
       <th>User</th>

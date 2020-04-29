@@ -1,12 +1,12 @@
 from flask_wtf import FlaskForm
-from wtforms import PasswordField, StringField, IntegerField
+from wtforms import PasswordField, StringField, SelectField
 from wtforms.widgets import TextArea
 
 class AddHorseForm(FlaskForm):
 
     name = StringField("Horse name")
     breed = StringField("Horse breed")
-    tier = IntegerField("Tier")
+    tier = SelectField("Tier", choices=[(1,1),(2,2),(3,3),(4,4),(5,5)])
     description = StringField("Description", widget=TextArea())
   
     class Meta:

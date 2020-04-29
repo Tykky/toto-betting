@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_bcrypt import Bcrypt
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 bcrypt = Bcrypt(app)
 
 from flask_sqlalchemy import SQLAlchemy
