@@ -1,85 +1,87 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<h1>Add races</h1>
-<form method="POST" action="{{ url_for('add_race') }}">
+<div class="container">
+  <h1>Add races</h1>
+  <form method="POST" action="{{ url_for('add_race') }}">
     <div class="form-group">
-  <table class="table">
-    <tr>
-    </tr>
-    <tr>
-      <td>{{ form.name.label }}</td>
-    </tr>
-    <tr>
-      <td>{{ form.name }}</td>
-      <td>
-        <ul>
-          {% for error in form.name.errors %}
-          <li>{{ error }}</li>
-          {% endfor %}
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>{{ form.location.label }}</td>
-    </tr>
-    <tr>
-      <td>{{ form.location }}</td>
-      <td>
-        <ul>
-          {% for error in form.location.errors %}
-          <li>{{ error }}</li>
-          {% endfor %}
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>{{ form.description.label }}</td>
-    </tr>
-    <tr>
-      <td>{{ form.description(cols="40", rows="10") }}</td>
-      <td>
-        <ul>
-          {% for error in form.description.errors %}
-          <li>{{ error }}</li>
-          {% endfor %}
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td><input type="submit" value="Add" class="btn btn-primary"/></td>
-        <td>{{msg}}</td>
-    </tr>
-  </table>
-    </div>
-</form>
-<table class="table">
-    <tr>
-        <th>Name</th>
-        <th>Location</th>
-        <th>Status</th>
-        <th>Change status</th>
-    </tr>
-    {% for race in races %}
+      <table class="table">
         <tr>
-            <td>{{ race.name }}</td>
-            <td>{{ race.location }}</td>
-            {% if race.isopen %}
-                <td>Open</td>
-            {% else %}
-                <td>Closed</td>
-            {% endif %}
+        </tr>
+        <tr>
+          <td>{{ form.name.label }}</td>
+        </tr>
+        <tr>
+          <td>{{ form.name }}</td>
           <td>
-            <form method="POST" action="{{url_for('change_race_status',raceid=race.raceid)}}">
-              <input type="submit" value="Change status" class="btn btn-primary">
-            </form>
-          </td>
-          <td>
-            <form method="POST" action="{{url_for('delete_race',raceid=race.raceid)}}">
-              <input type="submit" value="DELETE" class="btn btn-danger">
-            </form>
+            <ul>
+              {% for error in form.name.errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
           </td>
         </tr>
-    {% endfor %}
-</table>
+        <tr>
+          <td>{{ form.location.label }}</td>
+        </tr>
+        <tr>
+          <td>{{ form.location }}</td>
+          <td>
+            <ul>
+              {% for error in form.location.errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td>{{ form.description.label }}</td>
+        </tr>
+        <tr>
+          <td>{{ form.description(cols="40", rows="10") }}</td>
+          <td>
+            <ul>
+              {% for error in form.description.errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><input type="submit" value="Add" class="btn btn-primary"/></td>
+            <td>{{msg}}</td>
+        </tr>
+      </table>
+    </div>
+  </form>
+  <table class="table">
+      <tr>
+          <th>Name</th>
+          <th>Location</th>
+          <th>Status</th>
+          <th>Change status</th>
+      </tr>
+      {% for race in races %}
+          <tr>
+              <td>{{ race.name }}</td>
+              <td>{{ race.location }}</td>
+              {% if race.isopen %}
+                  <td>Open</td>
+              {% else %}
+                  <td>Closed</td>
+              {% endif %}
+            <td>
+              <form method="POST" action="{{url_for('change_race_status',raceid=race.raceid)}}">
+                <input type="submit" value="Change status" class="btn btn-primary">
+              </form>
+            </td>
+            <td>
+              <form method="POST" action="{{url_for('delete_race',raceid=race.raceid)}}">
+                <input type="submit" value="DELETE" class="btn btn-danger">
+              </form>
+            </td>
+          </tr>
+      {% endfor %}
+  </table>
+</div>
 {% endblock %}

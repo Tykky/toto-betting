@@ -1,30 +1,32 @@
 {% extends "layout.html" %}
 
 {% block body %}
+<div class="container">
   {% if current_user.is_authenticated %}
   {% if current_user.isadmin %}
     <p>
       User has admin privileges
     </p>
-  {% endif %}
-  {% endif %}
-<h3>Bets in total: {{ bcount }}</h3>
-<h3>Open bets in total: {{ obcount }}</h3>
-<h3>Total credits spent on bets {{ cspent }}€ </h3>
-<h2>Current bets placed on open races</h2>
-<table class="table">
-  <tr>
-    <th>User</th>
-    <th>Race</th>
-    <th>Location</th>
-    <th>Bet amount</th>
-  </tr>
-  {% for row in summary %}
-  <tr>
-    {% for item in row %}
-      <td>{{ item }}</td>
+    {% endif %}
+    {% endif %}
+  <h3>Bets in total: {{ bcount }}</h3>
+  <h3>Open bets in total: {{ obcount }}</h3>
+  <h3>Total credits spent on bets {{ cspent }}€ </h3>
+  <h2>Your bets</h2>
+  <table class="table">
+    <tr>
+      <th>User</th>
+      <th>Race</th>
+      <th>Location</th>
+      <th>Bet amount</th>
+    </tr>
+    {% for row in summary %}
+    <tr>
+      {% for item in row %}
+        <td>{{ item }}</td>
+      {% endfor %}
+    </tr>
     {% endfor %}
-  </tr>
-  {% endfor %}
-</table>
-{% endblock %}
+  </table>
+  {% endblock %}
+</div>

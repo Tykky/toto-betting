@@ -1,51 +1,53 @@
 {% extends "layout.html" %}
 {% block body %}
-<h1>Available races</h1>
-<table class="table">
+<div class="container">
+  <h1>Available races</h1>
+  <table class="table">
     <tr>
-        <th>Name</th>
-        <th>Location</th>
-        <th>Status</th>
-        <th>Place bet</th>
+      <th>Name</th>
+      <th>Location</th>
+      <th>Status</th>
+      <th>Place bet</th>
     </tr>
     {% for race in races %}
-        <tr>
-            <td>{{ race.name }}</td>
-            <td>{{ race.location }}</td>
-            {% if race.isopen %}
-                <td>Open</td>
-            {% else %}
-                <td>Closed</td>
-            {% endif %}
-            {% if race.isopen %}
-            <td><a href="{{url_for('place_bet', raceid=race.raceid)}}">Place bet</a></td>
-            {% else %}
-            <td></td>
-            {% endif %}
-        </tr>
+      <tr>
+        <td>{{ race.name }}</td>
+        <td>{{ race.location }}</td>
+        {% if race.isopen %}
+          <td>Open</td>
+        {% else %}
+          <td>Closed</td>
+        {% endif %}
+        {% if race.isopen %}
+          <td><a href="{{url_for('place_bet', raceid=race.raceid)}}">Place bet</a></td>
+        {% else %}
+          <td></td>
+        {% endif %}
+      </tr>
     {% endfor %}
-</table>
-<h1>Current bets</h1>
-<table class="table">
+  </table>
+  <h1>Current bets</h1>
+  <table class="table">
     <tr>
-        <th>Name</th>
-        <th>Location</th>
-        <th>Amount</th>
+      <th>Name</th>
+      <th>Location</th>
+      <th>Amount</th>
     </tr>
     {% for bet in current_user.bets %}
-    {% if bet.race.isopen %}
-    <tr>
-        <td>
+      {% if bet.race.isopen %}
+        <tr>
+          <td>
             {{ bet.race.name }}
-        </td>
-        <td>
+          </td>
+          <td>
             {{ bet.race.location }}
-        </td>
-        <td>
+          </td>
+          <td>
             {{ bet.amount }}
-        </td>
-    </tr>
-    {% endif %}
+          </td>
+        </tr>
+      {% endif %}
     {% endfor %}
-</table>
+  </table>
+</div>
 {% endblock %}

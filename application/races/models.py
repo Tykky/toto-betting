@@ -11,6 +11,7 @@ class Race(db.Model):
 
     isopen = db.Column(db.Boolean, nullable=False)
 
+
     def __init__(self, name, location, description=""):
         self.name = name
         self.location = location

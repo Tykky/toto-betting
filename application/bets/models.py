@@ -13,7 +13,7 @@ class Bet(db.Model):
     raceid = db.Column(db.Integer, db.ForeignKey('race.raceid'), nullable=False)
     horseid = db.Column(db.Integer, db.ForeignKey('horse.horseid'), nullable=False)
 
-    race = db.relationship("Race", backref='bet', lazy=True)
+    race = db.relationship("Race")
 
     def __init__(self, amount, userid, raceid, horseid):
         self.amount = amount
@@ -22,7 +22,6 @@ class Bet(db.Model):
         self.isopen = True
         self.horseid = horseid
 
-  
     def get_id(self):
         return self.id
 

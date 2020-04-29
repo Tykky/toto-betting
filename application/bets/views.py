@@ -20,7 +20,7 @@ def place_bet(raceid):
 
     if race and race.isopen:
         form = PlaceBetForm(request.form)
-        amount = form.amount.data
+        amount = round(form.amount.data, 10)
         if amount and current_user.credits - amount >= 0:
             bet = Bet(amount, current_user.get_id(), raceid, 2)
             current_user.credits = current_user.credits - amount
