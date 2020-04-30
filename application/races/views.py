@@ -13,7 +13,6 @@ def add_race():
 
     form = AddRaceForm(request.form)
     race = Race(form.name.data, form.location.data, form.description.data)
-    race.isopen = False
 
     db.session().add(race)
     db.session().commit()
@@ -49,9 +48,9 @@ def delete_race(raceid):
 def edit_race(raceid):
 
     race = Race.query.filter_by(raceid=raceid)
-
     if request.method == 'GET':
-        return render_template("races/edit.html", race=race)
+        horses = Horse.query.all()
+        return render_template("races/edit.html", horses=horses)
 
 
 

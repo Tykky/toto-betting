@@ -18,7 +18,7 @@ class Race(db.Model):
         self.name = name
         self.location = location
         self.description = description
-        self.isopen = True
+        self.isopen = False
 
     def get_id(self):
         return self.raceid

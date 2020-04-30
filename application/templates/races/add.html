@@ -78,25 +78,68 @@
             <td>{{ race.location }}</td>
             {% if race.isopen %}
               <td> Open </td>
+              <td>
+                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#confirm_close_{{race.raceid}}">Close</button>
+                <div class="modal fade" id="confirm_close_{{race.raceid}}" tabindex="-1" role="dialog" aria-labelledby="confirm close" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Confrim closure</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <p>Are you sure you want to close race {{ race.name }}</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <form method="POST" action="{{ url_for('change_race_status',raceid=race.raceid) }}">
+                          <input type="submit" value="Close" class="btn btn-warning">
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>   
             {% else %}
               <td> Closed </td>
-            {% endif %}
-            <td>
-              <form method="POST" action="{{ url_for('change_race_status',raceid=race.raceid) }}">
-                <input type="submit" value="Change" class="btn btn-warning">
-              </form>
-            </td>
-            <td>
-              <a href="{{ url_for('edit_race', raceid=race.raceid) }}">Edit</a>
-            </td>
-            {% if race.isopen %}
               <td>
-                <form method="POST" action="{{ url_for('delete_race', raceid=race.raceid) }}">
-                  <input type="submit" value="Delete" class="btn btn-danger">
+                <form method="POST" action="{{ url_for('change_race_status',raceid=race.raceid) }}">
+                  <input type="submit" value="Open" class="btn btn-success">
                 </form>
               </td>
-            {% else %}
+            {% endif %}
+            <td>
+              <a href="{{ url_for('edit_race', raceid=race.raceid) }}" class="btn btn-primary">Edit</a>
+            </td>
+            {% if race.isopen %}
               <td></td>
+            {% else %}
+            <td>
+              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirm_delete_{{race.raceid}}">Delete</button>
+              <div class="modal fade" id="confirm_delete_{{race.raceid}}" tabindex="-1" role="dialog" aria-labelledby="confirm delete" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Confirm delete</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p>Are you sure you want to delete race {{ race.name }}</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <form method="POST" action="{{ url_for('delete_race',raceid=race.raceid) }}">
+                        <input type="submit" value="Delete" class="btn btn-danger">
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>                
+            </td>
             {% endif %}
           </tr>
         {% endfor %}
