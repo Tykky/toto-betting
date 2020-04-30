@@ -3,7 +3,10 @@ from application import app, login_required, db
 from application.races.forms import AddRaceForm
 from application.races.models import Race
 from application.horses.models import Horse
+from application.auth.models import User
+from application.bets.models import Bet
 from application.races.models import Connector
+import random
 
 @app.route("/races/add", methods=['GET','POST'])
 @login_required(role="ADMIN")
@@ -30,9 +33,24 @@ def change_race_status(raceid):
 
             # Clear all bets
 
+            horses = race.horses
+            bets = Bet.query.filter_by(raceid=raceid)
+
+            rindex = int(random.uniform(1,len(horses))-1)
+            print(rindex)
+            
+            winner = horses[rindex]
+            wins = Bet.query.filter_by(horseid=winner.horseid)
+
+            for win in wins:
+                user = User.query.get(win.userid)
+                user.credits = user.credits + win.amount*2
+                db.session().commit()
+
+            winner.wins = winner.wins + 1
+            bets.delete()
             race.isopen = False
             db.session().commit()
-
 
         elif len(race.horses) >= 2:
             race.isopen = True
