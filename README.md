@@ -11,10 +11,7 @@ The app can be found on [heroku](https://toto-betting.herokuapp.com/)
 
 ## Overview
 The idea is to implement toto-betting site where users can place 
-bets on horse racing.
-
-**Note** that in the current state the removal of races does 
-not work as intended. 
+bets on horse racing. 
 
 Use these user credentials to gain admin access on heroku:
 
