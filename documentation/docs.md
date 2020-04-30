@@ -1,10 +1,5 @@
 # Toto-betting documentation
 
-## Implemented features
-
-Users can login, logout and see current horse races.
-Admin can add new races.
-
 ## User stories
 
 * User can register and login

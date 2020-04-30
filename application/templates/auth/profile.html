@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-5">
+            <h2>Logged in as {{ current_user.username }}</h2>
+            <h5>User created: {{ current_user.date_created }}</h5>
+            <h5>User modified: {{ current_user.date_modified }}</h5>
+            <h5>User credits: {{ current_user.credits }}</h5>
+            {% if current_user.isadmin %}
+            <div class="alert alert-success" role="alert">
+                User has admin privileges!
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

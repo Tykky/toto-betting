@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, url_for
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, current_user
 
-from application import app, db, bcrypt
+from application import app, db, bcrypt, login_required
 from application.auth.models import User
 from application.auth.forms import LoginForm
 from application.auth.forms import RegisterForm
@@ -22,7 +22,13 @@ def auth_login():
     login_user(user)
     return redirect(url_for("index"))
 
+@app.route("/auth/profile")
+@login_required(role="USER")
+def auth_profile():
+    return render_template("/auth/profile.html",user=current_user)
+
 @app.route("/auth/logout")
+@login_required(role="USER")
 def auth_logout():
     logout_user()
     return redirect(url_for("index"))

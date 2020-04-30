@@ -37,6 +37,9 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ url_for('horses') }} ">View horses</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('auth_profile') }} ">View profile</a>
+          </li>
           {% if current_user.isadmin %}
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('add_race') }}">Add races</a>
