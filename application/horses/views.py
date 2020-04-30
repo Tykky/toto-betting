@@ -26,7 +26,7 @@ def add_horse():
 @login_required(role="ADMIN")
 def delete_horse(horseid):
     horse = Horse.query.filter_by(horseid=horseid)
-    races = Horse.races
+    races = horse.first().races
     if horse.first():
         if not races:
             horse.delete()
@@ -51,7 +51,7 @@ def edit_horse(horseid):
 
         return render_template("/horses/edit.html", form=form, horseid=horseid)
 
-    if horse:
+    if not horse:
         form = AddHorseForm(request.form)
         horse.name = form.name.data
         horse.breed = form.breed.data
