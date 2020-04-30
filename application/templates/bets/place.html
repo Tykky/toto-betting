@@ -1,15 +1,43 @@
 {% extends "layout.html" %}
 {% block body %}
-<h1>Place bet on {{ race.name }}</h1>
-<b>Current balance: {{ current_user.credits }}</b>
-<p>Race location: {{ race.location }}</p>
-<h2>Race description:</h2>
-<p>{{ race.description }}</p>
-<form method="POST" action="{{url_for('place_bet',raceid=race.raceid)}}">
-  <div class="form-group">
-    <label>{{form.amount.label}}</label>
-    {{form.amount}}
-    <input type="submit" value="Place bet" class="btn btn-primary">
+<div class="container">
+  <div class="row">
+    <div class="col-sm-5 p-3">
+      <div class="row"><h2>Bet on {{ race.name }}</h2></div>
+      <div class="row">
+        <h5>Location: {{ race.location }}</h5>
+      </div>
+      <div class="row">
+        <p>{{ race.description }}</p>
+      </div>
+    </div>
+    <div class="col-sm-5 p-3">
+      <div class="row">
+        <h2>Select horse</h2>
+      </div>
+      <div class="row">
+        <table class="table">
+          <tr>
+            <th>Horse name</th>
+            <th>breed</th>
+            <th>tier</th>
+            <th>wins</th>
+            <th>Place bet</th>
+          </tr>
+          {% for horse in race.horses %}
+            <tr>
+              <td>{{ horse.name }}</td>
+              <td>{{ horse.breed }}</td>
+              <td>{{ horse.tier }}</td>
+              <td>{{ horse.wins }}</td>
+              <td>
+                <a href="{{ url_for('place_bet_confirm', horseid=horse.horseid, raceid=race.raceid) }}" class="btn btn-success">Bet</a>
+              </td>
+            </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
   </div>
-</form>
+</div>
 {% endblock %}
