@@ -30,6 +30,10 @@ def place_bet_confirm(raceid,horseid):
         race = Race.query.get(raceid)
 
         if horse and race:
-            return render_template("/bets/place_confirm.html",horse=horse, race=race)
+            return render_template("/bets/place_confirm.html",horse=horse, race=race, form=PlaceBetForm())
 
         return redirect(url_for('place_bet'))
+
+    # Make transaction
+
+    
