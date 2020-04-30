@@ -13,7 +13,6 @@ class Race(db.Model):
     isopen = db.Column(db.Boolean, nullable=False)
 
     horses = db.relationship("Horse", secondary='connector')
-    bets = db.relationship("Bet", backref='race', lazy=True)
 
 
     def __init__(self, name, location, description=""):
