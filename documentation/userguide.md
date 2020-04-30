@@ -23,7 +23,8 @@ races that are currently open to betting. After winner
 is determined, the race is closed and users cannot place 
 bets on this specific race. If bet was succesfull, credits 
 are returned to the users account with multiplier applied 
-to the amount. 
+to the amount. This multiplier is currently 2 for all 
+bets. 
 
 ## Adding races (Admin access only)
 

@@ -9,6 +9,8 @@ The app can be found on [heroku](https://toto-betting.herokuapp.com/)
 
 [Installation guide](/documentation/installguide.md)
 
+[Improvements & missing features](/documentation/improvements.md)
+
 ## Overview
 The idea is to implement toto-betting site where users can place 
 bets on horse racing. 
