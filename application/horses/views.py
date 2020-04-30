@@ -26,8 +26,27 @@ def add_horse():
 @login_required(role="ADMIN")
 def delete_horse(horseid):
     horse = Horse.query.filter_by(horseid=horseid)
-    if horse:
-        horse.delete()
-        db.session().commit()
-    
+    races = Horse.races
+    if horse.first():
+        if not races:
+            horse.delete()
+            db.session().commit()
+        else:
+            horses = Horse.query.all()
+            return render_template("/horses/add.html", horses=horses, form=AddHorseForm(),
+            error=horse.first().name+" is attending in at least one of the races! Please remove "+horse.first().name+" from "+
+            "all of the races before delete.")
     return redirect(url_for('add_horse'))
+
+@app.route("/horses/<horseid>/edit", methods=['POST','GET'])
+@login_required(role="ADMIN")
+def edit_horse(horseid):
+    if request.method == 'GET':
+        horse = Horse.query.get(horseid)
+        if horse:
+            form = AddHorseForm(name=horse.name, breed=horse.breed, tier=horse.tier,
+            description=horse.description)
+        else:
+            form = AddHorseForm()
+
+        return render_template("/horses/edit.html", form=form)

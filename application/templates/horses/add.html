@@ -3,6 +3,13 @@
 {% block body %}
 
 <div class="container">
+  {% if error %}
+  <div class="row">
+    <div class="alert alert-danger" role="alert" style="width:100%">
+      {{ error }}
+    </div>
+  </div>
+  {%endif %}
   <div class="row">
     <div class="col-sm-6">
       <h1>Add horses</h1>
@@ -42,14 +49,31 @@
             <td>{{ horse.breed }}</td>
             <td>{{ horse.tier }}</td>
             <td>
-              <form method="POST">
-                <button class="btn btn-warning">Edit</button>
-              </form>
+              <a href="{{ url_for('edit_horse',horseid=horse.horseid) }}" class="btn btn-warning">Edit</a>
             </td>
             <td>
-              <form method="POST" action="{{ url_for('delete_horse', horseid=horse.horseid) }}">
-                <button class="btn btn-danger">Delete</button>
-              </form>
+              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirm_delete_{{horse.horseid}}">Delete</button>
+              <div class="modal fade" id="confirm_delete_{{horse.horseid}}" tabindex="-1" role="dialog" aria-labelledby="confirm delete" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Confirm delete</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p>Are you sure you want to delete {{ horse.name }}</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <form method="POST" action="{{ url_for('delete_horse',horseid=horse.horseid) }}">
+                        <input type="submit" value="Delete" class="btn btn-danger">
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </td>
           </tr>
         {% endfor %}

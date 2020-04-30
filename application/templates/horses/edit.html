@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <form method="POST" action="{{ url_for('add_horse') }}">
+            <div class="form-group">
+              {{ form.name.label }}
+              {{ form.name(class_="form-control") }}
+            </div>
+            <div class="form-group">
+              {{ form.breed.label }}
+              {{ form.breed(class_="form-control") }}
+            </div>
+            <div class="form-group">
+              {{ form.tier.label }}
+              {{ form.tier(class_="form-control") }}
+            </div>
+            <div class="form-group">
+              {{ form.description.label }}
+              {{ form.description(class_="form-control", cols="40", rows="10") }}
+            </div>
+            <button type="submit" class="btn btn-primary">Add</button>
+          </form>
+    </div>
+</div>
+
+{% endblock %}

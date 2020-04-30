@@ -2,6 +2,13 @@
 
 {% block body %}
 <div class="container">
+  {% if error %}
+  <div class="row">
+    <div class="alert alert-danger" role="alert" style="width:100%">
+      {{ error }}
+    </div>
+  </div>
+  {%endif %}
   <div class="row">
     <div class="col-sm p-5">
       <div class="row"><h2>Change status</h2></div>
@@ -90,7 +97,7 @@
                         </button>
                       </div>
                       <div class="modal-body">
-                        <p>Are you sure you want to close race {{ race.name }}</p>
+                        <p>Are you sure you want to close {{ race.name }}</p>
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -130,7 +137,7 @@
                       </button>
                     </div>
                     <div class="modal-body">
-                      <p>Are you sure you want to delete race {{ race.name }}</p>
+                      <p>Are you sure you want to delete {{ race.name }}</p>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

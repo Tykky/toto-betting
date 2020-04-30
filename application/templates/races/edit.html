@@ -25,7 +25,7 @@
             </div>
         </div>
         <div class="col-sm-5">
-          <div class="row"><h2>Add horses to race</h2></div>
+          <div class="row"><h2>Add horses to the race</h2></div>
           <div class="row">
             <table class="table">
               <tr>
@@ -50,7 +50,7 @@
               {% endfor %}
             </table>
           </div>
-          <div class="row"><h2>Horses currently in race </h2></div>
+          <div class="row"><h2>Horses currently in the race </h2></div>
           <div class="row">
             <table class="table">
               <tr>
@@ -60,13 +60,21 @@
                 <th>Remove</th>
               </tr>
               {% for horse in horses %}
+              {% if horse.contains_raceid(race.raceid) %}
               <tr>
                 <td>{{ horse.name }}</td>
                 <td>{{ horse.breed }}</td>
                 <td>{{ horse.tier }}</td>
+                <td>
+                  <form method="POST" action="{{ url_for('remove_horse_from_race', raceid=race.raceid, horseid=horse.horseid) }}">
+                    <input type="submit" value="Remove" class="btn btn-danger">
+                  </form>
+                </td>
               </tr>
+              {% endif %}
               {% endfor %}
             </table>
+            <a href="{{ url_for('add_race') }}" class="btn btn-primary">Back</a>
           </div>
         </div>
     </div>

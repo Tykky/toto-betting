@@ -25,22 +25,34 @@ def add_race():
 def change_race_status(raceid):
 
     race = Race.query.get(raceid)
-    if race.isopen:
-        race.isopen = False
-    else:
-        race.isopen = True
-
-    db.session().commit()
+    if race:
+        if race.isopen:
+            race.isopen = False
+            db.session().commit()
+        elif len(race.horses) >= 2:
+            race.isopen = True
+            db.session().commit()
+        else:
+            races = Race.query.all()
+            return render_template("/races/add.html", races=races, form=AddRaceForm(),
+            error="Cannot open "+race.name+". Race has less than 2 horses!")
 
     return redirect(url_for("add_race"))
+
 @app.route("/races/<raceid>/delete", methods=['POST'])
 @login_required(role="ADMIN")
 def delete_race(raceid):
 
-    race = Race.query.filter_by(raceid=raceid).first()
-    if not race.isopen:
-        Race.query.filter_by(raceid=raceid).delete()
-        db.session().commit()
+    race = Race.query.filter_by(raceid=raceid)
+    if not race.first().isopen:
+        if len(race.first().horses) == 0:
+            race.delete()
+            db.session().commit()
+        else:
+            races = Race.query.all()
+            return render_template("/races/add.html", races=races, form=AddRaceForm(),
+            error="Cannot delete "+race.first().name+". There are horses in the race! Remove all "+
+            "the horses first.")
 
     return redirect(url_for('add_race'))
 
@@ -77,5 +89,17 @@ def add_horse_to_race(raceid, horseid):
 
     return redirect(url_for('edit_race', raceid=raceid))
 
+@app.route("/races/<raceid>/edit/removehorse/<horseid>", methods=['POST'])
+@login_required(role="ADMIN")
+def remove_horse_from_race(raceid, horseid):
 
+    horse = Horse.query.filter_by(horseid=horseid).first()
+    race = Race.query.filter_by(raceid=raceid).first()
 
+    if horse and race:
+        connector = Connector.query.filter_by(raceid=raceid, horseid=horseid)
+        if connector.first():
+            connector.delete()
+            db.session().commit()
+
+    return redirect(url_for('edit_race', raceid=raceid))
