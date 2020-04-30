@@ -11,7 +11,7 @@
             <td>{{ form.username.label }}</td>
           </tr>
           <tr>
-            <td>{{ form.username }}</td>
+            <td>{{ form.username(class_="form-control") }}</td>
             <td>
               <ul>
                 {% for error in form.username.errors %}
@@ -24,7 +24,7 @@
             <td>{{ form.password1.label }}</td>
           </tr>
           <tr>
-            <td>{{ form.password1 }}</td>
+            <td>{{ form.password1(class_="form-control") }}</td>
             <td>
               <ul>
                 {% for error in form.password1.errors %}
@@ -37,7 +37,7 @@
             <td>{{ form.password2.label }}</td>
           </tr>
           <tr>
-            <td>{{ form.password2 }}</td>
+            <td>{{ form.password2(class_="form-control") }}</td>
             <td>
               <ul>
                 {% for error in form.password2.errors %}

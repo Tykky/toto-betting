@@ -41,12 +41,23 @@ def delete_horse(horseid):
 @app.route("/horses/<horseid>/edit", methods=['POST','GET'])
 @login_required(role="ADMIN")
 def edit_horse(horseid):
+    horse = Horse.query.get(horseid)
     if request.method == 'GET':
-        horse = Horse.query.get(horseid)
         if horse:
             form = AddHorseForm(name=horse.name, breed=horse.breed, tier=horse.tier,
             description=horse.description)
         else:
             form = AddHorseForm()
 
-        return render_template("/horses/edit.html", form=form)
+        return render_template("/horses/edit.html", form=form, horseid=horseid)
+
+    if horse:
+        form = AddHorseForm(request.form)
+        horse.name = form.name.data
+        horse.breed = form.breed.data
+        horse.tier = form.tier.data
+        horse.description = form.description.data
+
+        db.session().commit()
+
+    return redirect(url_for('add_horse'))
