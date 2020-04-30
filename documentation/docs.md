@@ -11,5 +11,4 @@ Admin can add new races.
 * User can view profile information (balance etc..)
 * User can view current races
 * User is able to place bets on current races
-* User can view previous races
 * Admin can perform user actions + create new races

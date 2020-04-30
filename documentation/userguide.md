@@ -34,12 +34,8 @@ which can be chosen from a list.
 
 ## Adding horses (Admin access only)
 
-### This feature is not implemented yet
-
 Horses can be added by clicking "Add horses" click. Each 
 horse is given name, breed, "tier" and description. Tier 
-determines how good contender each horse is. Horses climb 
-up the tier-ladder by winning races and by losing they 
-go down the ladder. This is similiar to generic [ELO-rating system](https://en.wikipedia.org/wiki/Elo_rating_system).
+determines how good contender each horse is.
 Admin is able to delete horses from this page also, (when 
 horses retire, this might be useful).
