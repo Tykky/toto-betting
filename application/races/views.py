@@ -16,10 +16,11 @@ def add_race():
         return render_template("/races/add.html",races = races, form = AddRaceForm())
 
     form = AddRaceForm(request.form)
-    race = Race(form.name.data, form.location.data, form.description.data)
+    if form.validate():
+        race = Race(form.name.data, form.location.data, form.description.data)
 
-    db.session().add(race)
-    db.session().commit()
+        db.session().add(race)
+        db.session().commit()
 
     return redirect(url_for("add_race"))
 
@@ -92,10 +93,11 @@ def edit_race(raceid):
             location=race.location, description=race.description))
 
         form = AddRaceForm(request.form)
-        race.name = form.name.data
-        race.location = form.location.data
-        race.description = form.description.data
-        db.session().commit()
+        if form.validate():
+            race.name = form.name.data
+            race.location = form.location.data
+            race.description = form.description.data
+            db.session().commit()
 
     return redirect(url_for('add_race'))
 

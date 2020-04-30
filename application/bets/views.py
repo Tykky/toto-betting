@@ -37,6 +37,10 @@ def place_bet_confirm(raceid,horseid):
     # Make transaction
 
     form = PlaceBetForm(request.form)
+    
+    if not form.validate():
+        return render_template("/bets/bets.html", races=Race.query.all(), form = form)
+
     amount = round(form.amount.data,2)
 
     if current_user.credits - amount >= 0:
@@ -45,7 +49,7 @@ def place_bet_confirm(raceid,horseid):
         db.session().add(bet)
         db.session().commit()
         return redirect(url_for('bets'))
-        
+
     races = Race.query.all()
     return render_template("/bets/bets.html", races=races, form = PlaceBetForm(), 
     error="Transaction failed. Your account doesn't have sufficient funds.")

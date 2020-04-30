@@ -60,11 +60,12 @@ def edit_horse(horseid):
 
     if not horse:
         form = AddHorseForm(request.form)
-        horse.name = form.name.data
-        horse.breed = form.breed.data
-        horse.tier = form.tier.data
-        horse.description = form.description.data
+        if form.validate():
+            horse.name = form.name.data
+            horse.breed = form.breed.data
+            horse.tier = form.tier.data
+            horse.description = form.description.data
 
-        db.session().commit()
+            db.session().commit()
 
     return redirect(url_for('add_horse'))
