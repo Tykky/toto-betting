@@ -2,29 +2,20 @@
 
 {% block body %}
 <div class="container">
-  {% if current_user.is_authenticated and current_user.isadmin %}
-    <p>
-      User has admin privileges
-    </p>
+  <div class="row">
+    {% if current_user.is_authenticated %}
+      <h1>Welcome back {{ current_user.username }}</h1>
+    {% else %}
+      <h1>Welcome to toto betting</h1>
     {% endif %}
-  <h3>Bets in total: {{ bcount }}</h3>
-  <h3>Open bets in total: {{ obcount }}</h3>
-  <h3>Total credits spent on bets {{ cspent }}€ </h3>
-  <h2>Current bets placed on open races</h2>
-  <table class="table">
-    <tr>
-      <th>User</th>
-      <th>Race</th>
-      <th>Location</th>
-      <th>Bet amount</th>
-    </tr>
-    {% for row in summary %}
-    <tr>
-      {% for item in row %}
-        <td>{{ item }}</td>
-      {% endfor %}
-    </tr>
-    {% endfor %}
-  </table>
-  {% endblock %}
+  </div>
+  <div class="row">
+    <div class="col">
+      <p>
+        Before users can place bets on this site, they must 
+        create a account 
+      </p>
+    </div>
+  </div>
 </div>
+  {% endblock %}

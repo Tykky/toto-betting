@@ -2,6 +2,7 @@ from flask import render_template, request, redirect, url_for
 from application import app, login_required, db
 from application.races.forms import AddRaceForm
 from application.races.models import Race
+from application.horses.models import Horse
 
 @app.route("/races/add", methods=['GET','POST'])
 @login_required(role="ADMIN")
@@ -12,6 +13,7 @@ def add_race():
 
     form = AddRaceForm(request.form)
     race = Race(form.name.data, form.location.data, form.description.data)
+    race.isopen = False
 
     db.session().add(race)
     db.session().commit()
@@ -35,8 +37,21 @@ def change_race_status(raceid):
 @login_required(role="ADMIN")
 def delete_race(raceid):
 
-    Race.query.filter_by(raceid=raceid).delete()
-    db.session().commit()
+    race = Race.query.filter_by(raceid=raceid).first()
+    if not race.isopen:
+        Race.query.filter_by(raceid=raceid).delete()
+        db.session().commit()
 
     return redirect(url_for('add_race'))
+
+@app.route("/races/<raceid>/edit", methods=['POST','GET'])
+@login_required(role="ADMIN")
+def edit_race(raceid):
+
+    race = Race.query.filter_by(raceid=raceid)
+
+    if request.method == 'GET':
+        return render_template("races/edit.html", race=race)
+
+
 

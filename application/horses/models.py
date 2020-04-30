@@ -8,6 +8,8 @@ class Horse(db.Model):
     tier = db.Column(db.Integer, nullable=False)
     description = db.Column(db.String(2000), nullable=False)
 
+    races = db.relationship("Race", secondary='connector')
+
     def __init__(self, name, breed, tier, description):
         self.name = name
         self.breed = breed

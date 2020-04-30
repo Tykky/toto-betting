@@ -1,5 +1,6 @@
 from application import db
 
+
 class Race(db.Model):
 
     raceid = db.Column(db.Integer, primary_key=True)
@@ -11,6 +12,7 @@ class Race(db.Model):
 
     isopen = db.Column(db.Boolean, nullable=False)
 
+    horses = db.relationship("Horse", secondary='connector')
 
     def __init__(self, name, location, description=""):
         self.name = name
@@ -22,7 +24,7 @@ class Race(db.Model):
         return self.raceid
 
     def is_active(self):
-        return True
+        return True 
 
     def is_anonymous(self):
         return False
@@ -32,8 +34,8 @@ class Race(db.Model):
 
 class Connector(db.Model):
 
-    raceid = db.Column(db.Integer, primary_key=True)
-    horseid = db.Column(db.Integer, primary_key=True)
+    horseid = db.Column(db.Integer, db.ForeignKey('horse.horseid'), primary_key=True)
+    raceid = db.Column(db.Integer, db.ForeignKey('race.raceid'), primary_key=True)
 
     def __init__(self, raceid, horseid):
         self.raceid = raceid
