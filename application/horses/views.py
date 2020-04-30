@@ -35,7 +35,7 @@ def delete_horse(horseid):
             horses = Horse.query.all()
             return render_template("/horses/add.html", horses=horses, form=AddHorseForm(),
             error=horse.first().name+" is attending in at least one of the races! Please remove "+horse.first().name+" from "+
-            "all of the races before delete.")
+            "all of the races before using delete.")
     return redirect(url_for('add_horse'))
 
 @app.route("/horses/<horseid>/edit", methods=['POST','GET'])

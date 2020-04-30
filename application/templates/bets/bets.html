@@ -6,22 +6,14 @@
     <tr>
       <th>Name</th>
       <th>Location</th>
-      <th>Status</th>
       <th>Place bet</th>
     </tr>
     {% for race in races %}
       <tr>
+        {% if race.isopen %}
         <td>{{ race.name }}</td>
         <td>{{ race.location }}</td>
-        {% if race.isopen %}
-          <td>Open</td>
-        {% else %}
-          <td>Closed</td>
-        {% endif %}
-        {% if race.isopen %}
-          <td><a href="{{url_for('place_bet', raceid=race.raceid)}}">Place bet</a></td>
-        {% else %}
-          <td></td>
+        <td><a href="{{url_for('place_bet', raceid=race.raceid)}}" class="btn btn-primary">Place bet</a></td>
         {% endif %}
       </tr>
     {% endfor %}
