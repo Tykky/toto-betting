@@ -27,3 +27,9 @@ class Horse(db.Model):
 
     def is_authenticated(self):
         return False
+
+    def contains_raceid(self, raceid):
+        for race in self.races:
+            if race.raceid == raceid:
+                return True
+        return False
