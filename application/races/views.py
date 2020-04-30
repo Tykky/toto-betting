@@ -29,6 +29,7 @@ def change_race_status(raceid):
         if race.isopen:
 
             # Clear all bets
+            bet Race.bet
 
             race.isopen = False
             db.session().commit()
