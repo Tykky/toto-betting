@@ -5,7 +5,23 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <h2> Show horses </h2>
+            <h2>All horses</h2>
+            <table class="table">
+                <tr>
+                    <th>Horse name</th>
+                    <th>Breed</th>
+                    <th>Tier</th>
+                    <th>Wins</th>
+                </tr>
+                {% for horse in horses %}
+                    <tr>
+                        <td>{{ horse.name }}</td>
+                        <td>{{ horse.breed }}</td>
+                        <td>{{ horse.tier }}</td>
+                        <td>{{ horse.wins }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
         </div>
     </div>
 </div>

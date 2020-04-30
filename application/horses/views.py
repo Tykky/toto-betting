@@ -22,6 +22,10 @@ def add_horse():
 
     return redirect(url_for('add_horse'))
 
+@app.route("/horses/<horseid>", methods=['GET'])
+def horse(horseid):
+    pass
+
 @app.route("/horses/<horseid>/delete", methods=['POST'])
 @login_required(role="ADMIN")
 def delete_horse(horseid):

@@ -7,6 +7,7 @@ class Horse(db.Model):
     breed = db.Column(db.String(16), nullable=False)
     tier = db.Column(db.Integer, nullable=False)
     description = db.Column(db.String(2000), nullable=False)
+    wins = db.Column(db.Integer, nullable=False)
 
     races = db.relationship("Race", secondary='connector')
 
@@ -15,6 +16,7 @@ class Horse(db.Model):
         self.breed = breed
         self.tier = tier
         self.description = description
+        self.wins = 0
 
     def get_id(self):
         return self.id
