@@ -1,5 +1,22 @@
 # Toto-betting documentation
 
+
+## Implemented features
+
+* There are two user roles ( admin and regular user). Admin user has 
+more features at disposal. Admin can create new races and add new horses 
+while regular users cannot perform this.
+
+* Regular users can place bets on races when admin has created those. 
+Each racse has at least 2 horses since it wouldn't make much sense 
+being able to place bet on a single horse. 
+
+* Winner of each race (horse) is determined by throwing a dice (chosen randomly).
+
+* Password hashing + salting through flask-bcrypt.
+
+
+
 ## User stories
 
 * User can register and login
@@ -8,9 +25,46 @@
 * User is able to place bets on current races
 * Admin can perform user actions + create new races
 
+## SQL in user stories
+
+### Creating users in SQL
+
+```
+INSERT INTO account(username) VALUES (?)
+```
+### Viewing profile information in SQL
+```
+SELECT * FROM account WHERE username=?
+```
+### Setting admin privileges to a user (only possible in SQL)
+```
+UPDATE account SET isadmin=1 WHERE username=?
+```
+### Viewing bet history(note that bets can be deleted permanently)
+```
+SELECT account.username, race.name, race.location, bet.amount
+                     FROM bet INNER JOIN race ON race.raceid = bet.raceid
+                     INNER JOIN account ON account.userid = bet.userid");
+```
+### Viewing only current/open races
+```
+SELECT account.username, race.name, race.location, bet.amount
+                     FROM bet INNER JOIN race ON race.raceid = bet.raceid
+                     INNER JOIN account ON account.userid = bet.userid
+                     WHERE race.isopen IS TRUE");
+```
+### Placing bet
+```
+INSERT INTO bet(userid,raceid,horseid) VALUES (?,?,?)
+```
+
+### Creating new races (admin only)
+
+```
+INSERT INTO race(name,location,description) VALUES (?,?,?)
+```
+
 ## Create table SQL expressions
-
-
 ### User table
 ```
 CREATE TABLE user (
