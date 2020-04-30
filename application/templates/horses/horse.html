@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 p-5">
+            <div class="row"><h5>name: {{ horse.name }}</h5></div>
+            <div class="row"><h5>breed: {{ horse.breed }}</h5></div>
+            <div class="row"><h5>tier: {{ horse.tier }}</h5></div>
+            <div class="row"><h5>wins: {{ horse.wins }}</h5></div>
+        </div>
+        <div class="col-md-3 p-5">
+            <h5>Description</h5>
+            <p>{{ horse.description }}</p>
+        </div>
+    </div>
+    <dic class="row">
+        <a href="{{url_for('horses')}}" class="btn btn-primary">Back</a>
+    </dic>
+</div>
+
+{% endblock %}

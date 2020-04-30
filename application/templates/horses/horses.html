@@ -12,6 +12,7 @@
                     <th>Breed</th>
                     <th>Tier</th>
                     <th>Wins</th>
+                    <th>Details</th>
                 </tr>
                 {% for horse in horses %}
                     <tr>
@@ -19,6 +20,9 @@
                         <td>{{ horse.breed }}</td>
                         <td>{{ horse.tier }}</td>
                         <td>{{ horse.wins }}</td>
+                        <td>
+                            <a href="{{ url_for('horse',horseid=horse.horseid) }}"> Details </a>
+                        </td>
                     </tr>
                 {% endfor %}
             </table>

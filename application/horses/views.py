@@ -24,13 +24,16 @@ def add_horse():
 
 @app.route("/horses/<horseid>", methods=['GET'])
 def horse(horseid):
-    pass
+    horse = Horse.query.get(horseid)
+    if horse:
+        return render_template("/horses/horse.html", horse=horse)
+    return redirect(url_for('horses'))
 
 @app.route("/horses/<horseid>/delete", methods=['POST'])
 @login_required(role="ADMIN")
 def delete_horse(horseid):
     horse = Horse.query.filter_by(horseid=horseid)
-    races = horse.first().races
+    races = horse.first().races 
     if horse.first():
         if not races:
             horse.delete()
