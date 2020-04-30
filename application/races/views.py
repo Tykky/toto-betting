@@ -46,11 +46,11 @@ def delete_race(raceid):
 @app.route("/races/<raceid>/edit", methods=['POST','GET'])
 @login_required(role="ADMIN")
 def edit_race(raceid):
-
-    race = Race.query.filter_by(raceid=raceid)
-    if request.method == 'GET':
+    race = Race.query.filter_by(raceid=raceid).first()
+    if request.method == 'GET' and race and not race.isopen:
         horses = Horse.query.all()
-        return render_template("races/edit.html", horses=horses)
+        return render_template("races/edit.html", horses=horses, race=race, form=AddRaceForm(name=race.name,
+        location=race.location, description=race.description))
 
 
 
