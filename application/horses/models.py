@@ -10,6 +10,7 @@ class Horse(db.Model):
     wins = db.Column(db.Integer, nullable=False)
 
     races = db.relationship("Race", secondary='connector')
+    bets = db.relationship("Bet", backref='horse', lazy=True)
 
     def __init__(self, name, breed, tier, description):
         self.name = name

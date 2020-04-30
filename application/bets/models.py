@@ -13,10 +13,6 @@ class Bet(db.Model):
     raceid = db.Column(db.Integer, db.ForeignKey('race.raceid'), nullable=False)
     horseid = db.Column(db.Integer, db.ForeignKey('horse.horseid'), nullable=False)
 
-    race = db.relationship("Race")
-    user = db.relationship("User")
-    horse = db.relationship("Horse")
-
     def __init__(self, amount, userid, raceid, horseid):
         self.amount = amount
         self.userid = userid

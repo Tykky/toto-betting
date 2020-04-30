@@ -14,7 +14,7 @@ class User(db.Model):
     credits = db.Column(db.Numeric, nullable=False)
     isadmin = db.Column(db.Boolean, nullable=False)
 
-    bets = db.relationship("Bet", backref='account', lazy=True)
+    bets = db.relationship("Bet", backref='user', lazy=True)
 
     def __init__(self, username, phash):
         self.username = username
