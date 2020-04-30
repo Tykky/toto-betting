@@ -27,8 +27,13 @@ def change_race_status(raceid):
     race = Race.query.get(raceid)
     if race:
         if race.isopen:
+
+            # Clear all bets
+
             race.isopen = False
             db.session().commit()
+
+
         elif len(race.horses) >= 2:
             race.isopen = True
             db.session().commit()
