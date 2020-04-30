@@ -15,5 +15,24 @@
       <h3>Total credits spent on bets {{ cspent }}€ </h3>
     </div>
   </div>
+  <div class="row">
+    <div class="col-sm-5">
+      <table class="table">
+        <tr>
+          <th>User</th>
+          <th>Race</th>
+          <th>Location</th>
+          <th>Bet amount</th>
+        </tr>
+        {% for row in summary %}
+        <tr>
+          {% for item in row %}
+            <td>{{ item }}</td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+    </div>
 </div>
 {% endblock %}
